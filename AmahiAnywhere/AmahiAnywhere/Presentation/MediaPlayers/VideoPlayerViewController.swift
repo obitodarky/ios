@@ -43,7 +43,7 @@ class VideoPlayerViewController: UIViewController {
         
         timeSlider.setThumbImage(UIImage(named: "sliderKnobIcon"), for: .normal)
         
-        UIApplication.shared.statusBarStyle = .lightContent
+        
         
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(userTouchScreen))
         gesture.delegate = self
@@ -60,6 +60,8 @@ class VideoPlayerViewController: UIViewController {
         self.setUpIndicatorLayers(imageView: rewindIndicator)
         self.setUpIndicatorLayers(imageView: forwardIndicator)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
