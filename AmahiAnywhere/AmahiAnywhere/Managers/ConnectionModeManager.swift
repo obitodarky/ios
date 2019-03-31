@@ -67,8 +67,8 @@ class ConnectionModeManager {
         
         AmahiLogger.log("testLocalAvailability was called")
         
-        if lastCheckedAt != nil && fabs(Float(lastCheckedAt!.timeIntervalSinceNow)) <= Float(MinimumConnectionCheckPeriod)  {
-                 AmahiLogger.log("local checking ratelimit exceeded. last cheked %.1fs ago", fabs(Float((lastCheckedAt?.timeIntervalSinceNow)!)))
+        if lastCheckedAt != nil && abs(Float(lastCheckedAt!.timeIntervalSinceNow)) <= Float(MinimumConnectionCheckPeriod)  {
+            AmahiLogger.log("local checking ratelimit exceeded. last cheked %.1fs ago", abs(Float((lastCheckedAt?.timeIntervalSinceNow)!)))
             return
         }
         
