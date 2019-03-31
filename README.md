@@ -7,8 +7,8 @@ Amahi iOS App, new from scratch, in Swift.
 
 ## Requirements
 
-- iOS 11.0+
-- Xcode 10.0+
+- iOS 9.0+
+- Xcode 9.0+
 
 ## Setup
 - Close Xcode
