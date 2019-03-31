@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SDWebImage
 
 extension OfflineFilesTableViewController {
     
@@ -29,6 +30,21 @@ extension OfflineFilesTableViewController {
         tap.cancelsTouchesInView = true
         cell.menuImageView.isUserInteractionEnabled = true
         cell.menuImageView.addGestureRecognizer(tap)
+        
+        var imageName = ""
+        if (offlineFile.mime!.starts(with: "image")) {
+            imageName = "image"
+        }
+        else if (offlineFile.mime!.starts(with: "audio")) {
+            imageName = "audio"
+        }
+        else if (offlineFile.mime!.starts(with: "video")) {
+            imageName = "video"
+        }
+        else {
+            imageName = "file"
+        }
+        cell.thumbnailImage.sd_setImage(with: offlineFile.remoteFileURL().absoluteURL, placeholderImage: UIImage(named: imageName),options:.refreshCached)
       
         if offlineFile.stateEnum != .downloading {
             cell.progressView.isHidden = true
@@ -55,7 +71,7 @@ extension OfflineFilesTableViewController {
         
         let offlineFile = self.fetchedResultsController!.object(at: indexPath) as! OfflineFile
         
-        let delete = UITableViewRowAction(style: .destructive, title: StringLiterals.DELETE) { (action, indexPath) in
+        let delete = UITableViewRowAction(style: .destructive, title: StringLiterals.delete) { (action, indexPath) in
             
             // Delete file in downloads directory
             let fileManager = FileManager.default
@@ -75,7 +91,7 @@ extension OfflineFilesTableViewController {
         }
         delete.backgroundColor = UIColor.red
         
-        let share = UITableViewRowAction(style: .normal, title: StringLiterals.SHARE) { (action, indexPath) in
+        let share = UITableViewRowAction(style: .normal, title: StringLiterals.share) { (action, indexPath) in
             
             guard let url = FileManager.default.localFilePathInDownloads(for: offlineFile) else { return }
             self.shareFile(at: url, from: tableView.cellForRow(at: indexPath))

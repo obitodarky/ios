@@ -11,8 +11,8 @@ import SkyFloatingLabelTextField
 
 class LoginViewController: BaseUIViewController {
 
-    @IBOutlet weak var usernameInputField: SkyFloatingLabelTextField!
-    @IBOutlet weak var passwordInputField: SkyFloatingLabelTextField!
+    @IBOutlet private weak var usernameInputField: SkyFloatingLabelTextField!
+    @IBOutlet private weak var passwordInputField: SkyFloatingLabelTextField!
     
     private var presenter: LoginPresenter!
     
@@ -23,6 +23,17 @@ class LoginViewController: BaseUIViewController {
         
         usernameInputField.delegate = self
         passwordInputField.delegate = self
+    }
+    
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == usernameInputField {
+            textField.resignFirstResponder()
+            passwordInputField.becomeFirstResponder()
+        }
+        else if textField == passwordInputField {
+            textField.resignFirstResponder()
+        }
+        return true
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -38,13 +49,13 @@ class LoginViewController: BaseUIViewController {
         
         if (usernameInputField.text?.isEmpty)! {
             usernameInputField.errorColor = UIColor.red
-            usernameInputField.errorMessage = StringLiterals.FIELD_IS_REQUIRED
+            usernameInputField.errorMessage = StringLiterals.fieldIsRequired
             return
         }
         
         if (passwordInputField.text?.isEmpty)! {
             passwordInputField.errorColor = UIColor.red
-            passwordInputField.errorMessage = StringLiterals.FIELD_IS_REQUIRED
+            passwordInputField.errorMessage = StringLiterals.fieldIsRequired
             return
         }
         
@@ -60,7 +71,7 @@ extension LoginViewController: LoginView {
     
     func showHome() {
         
-        let serverVc = self.instantiateViewController(withIdentifier: "NavigationViewController", from: StoryBoardIdentifiers.MAIN)
+        let serverVc = self.instantiateViewController(withIdentifier: "NavigationViewController", from: StoryBoardIdentifiers.main)
         self.present(serverVc, animated: true, completion: nil)
     }
     
