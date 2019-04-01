@@ -25,6 +25,11 @@ class LoginViewController: BaseUIViewController {
         passwordInputField.delegate = self
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        usernameInputField.endEditing(true)
+        passwordInputField.endEditing(true)
+    }
+    
     override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == usernameInputField {
             textField.resignFirstResponder()
