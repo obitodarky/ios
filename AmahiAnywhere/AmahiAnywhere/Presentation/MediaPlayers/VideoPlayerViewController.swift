@@ -78,7 +78,7 @@ class VideoPlayerViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
 
-    return .lightContent //removed deprecated function statusBarStyle
+        return .lightContent //removed deprecated function statusBarStyle
 
     }
 
