@@ -49,7 +49,6 @@ class VideoPlayerViewController: UIViewController {
         
         timeSlider.setThumbImage(UIImage(named: "sliderKnobIcon"), for: .normal)
         
-        UIApplication.shared.statusBarStyle = .lightContent
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         movieView.addGestureRecognizer(panGesture)
@@ -76,6 +75,13 @@ class VideoPlayerViewController: UIViewController {
         
         MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget(self, action: #selector(playandPause(_:)))
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+
+    return .lightContent //removed deprecated function statusBarStyle
+
+    }
+
     
     @objc func handlePanGesture(panGesture: UIPanGestureRecognizer) {
         
@@ -396,7 +402,7 @@ extension VideoPlayerViewController: VLCMediaPlayerDelegate {
     }
     
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        AmahiLogger.log("Player State \(VLCMediaPlayerStateToString((mediaPlayer?.state)!))")
+        AmahiLogger.log("Player State \(String(describing: VLCMediaPlayerStateToString((mediaPlayer?.state)!)))")
         
         if mediaPlayer?.state == VLCMediaPlayerState.ended ||
             mediaPlayer?.state == VLCMediaPlayerState.stopped {
