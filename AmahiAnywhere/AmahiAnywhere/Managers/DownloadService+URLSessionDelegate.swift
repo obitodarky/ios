@@ -28,7 +28,7 @@ extension DownloadService: URLSessionDownloadDelegate {
     
     // Stores downloaded file
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        AmahiLogger.log("Download Has Completed for url \(downloadTask.originalRequest?.url!)")
+        AmahiLogger.log("Download Has Completed for url \(String(describing: downloadTask.originalRequest?.url!))")
 
         guard let sourceURL = downloadTask.originalRequest?.url else { return }
         guard let download = DownloadService.shared.activeDownloads[sourceURL] else { return }

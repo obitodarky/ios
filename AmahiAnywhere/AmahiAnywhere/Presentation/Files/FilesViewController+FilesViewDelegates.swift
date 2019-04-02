@@ -105,7 +105,7 @@ extension FilesViewController: FilesView {
     @objc func nextAudio(notification: Notification) {
         AmahiLogger.log("nextAudio was called")
         guard player != nil else { return }
-        AmahiLogger.log("AVPlayerItemDidPlayToEndTime notif info  \(notification.userInfo)")
+        AmahiLogger.log("AVPlayerItemDidPlayToEndTime notif info  \(String(describing: notification.userInfo))")
         //        if let currentItem = player.currentItem {
         if let currentItem = notification.userInfo!["object"] as? AVPlayerItem {
             currentItem.seek(to: CMTime.zero)
