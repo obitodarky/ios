@@ -82,7 +82,6 @@ class VideoPlayerViewController: UIViewController {
 
     }
 
-    
     @objc func handlePanGesture(panGesture: UIPanGestureRecognizer) {
         
         // Adding the volume label to the view
@@ -118,8 +117,6 @@ class VideoPlayerViewController: UIViewController {
             }
         }
     }
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
